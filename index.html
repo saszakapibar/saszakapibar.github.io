@@ -4,71 +4,21 @@ HTML
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub Card</title>
+    <title>Hub Card Gravity</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background-color: #0d1117; 
-            color: #c9d1d9; 
-            min-height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px; 
-            overflow: hidden;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+        body { background-color: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; font-family: sans-serif; }
 
-        /* Animacja lewitacji */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        .floating { animation: float 3s ease-in-out infinite; }
-
-        /* Ikony - klasyczny rozmiar */
-        .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
-        
-        .capy-container { position: fixed; top: 20px; right: 20px; text-align: center; z-index: 10; }
-        .capy-img { width: 80px; }
-        .capy-text { margin-top: 5px; font-weight: bold; color: #fff; font-size: 12px; }
-
-        .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 80px; z-index: 10; }
-        .support-img { position: fixed; bottom: 20px; right: 20px; width: 50px; z-index: 10; border-radius: 50%; }
-
-        /* Karta główna */
-        .hub-card { 
-            background-color: #161b22; 
-            border: 1px solid #30363d; 
-            border-radius: 16px; 
-            padding: 30px; 
-            width: 100%; 
-            max-width: 420px; 
-            text-align: center; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            z-index: 2;
-        }
-
+        .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 1; }
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
         .progress-container { background-color: #21262d; border-radius: 10px; height: 22px; width: 100%; margin-bottom: 35px; position: relative; }
         .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; }
-        .bmc-button { display: inline-flex; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; transition: transform 0.1s; }
-        .bmc-button:hover { transform: scale(1.02); }
+        .bmc-button { display: inline-flex; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; }
+        
+        #gravity-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; cursor: grab; }
     </style>
 </head>
 <body>
-
-    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo floating" alt="Logo">
-    
-    <div class="capy-container floating">
-        <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img" alt="Cappy">
-        <div class="capy-text">pls donate bro</div>
-    </div>
-
-    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif floating" alt="Dance">
-    <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img floating" alt="Support">
 
     <div class="hub-card">
         <h2 class="title">Nixware for month ❤️</h2>
@@ -76,5 +26,64 @@ HTML
         <a href="https://buymeacoffee.com/bilykovsasb" target="_blank" class="bmc-button">Buy me a coffee</a>
     </div>
 
+    <canvas id="gravity-canvas"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script>
+        const canvas = document.getElementById('gravity-canvas');
+        const engine = Matter.Engine.create();
+        const world = engine.world;
+        const render = Matter.Render.create({ 
+            canvas: canvas, 
+            engine: engine, 
+            options: { width: window.innerWidth, height: window.innerHeight, wireframes: false, background: 'transparent' } 
+        });
+
+        world.gravity.y = 0;
+
+        // Klasyczne rozmiary (w=80-140)
+        const objects = [
+            { url: 'https://pbs.twimg.com/media/FGH_shaXwAQOUid.png', x: 100, y: 100, w: 80, h: 80, text: '' },
+            { url: 'https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif', x: window.innerWidth/2, y: 250, w: 120, h: 120, text: 'pls donate bro' },
+            { url: 'https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif', x: 100, y: window.innerHeight - 150, w: 140, h: 140, text: '' },
+            { url: 'https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png', x: window.innerWidth - 150, y: window.innerHeight - 150, w: 90, h: 90, text: 'Only you can support me' }
+        ];
+
+        objects.forEach(obj => {
+            const body = Matter.Bodies.circle(obj.x, obj.y, obj.w/2, { restitution: 0.7 });
+            body.render.sprite.texture = obj.url;
+            body.render.sprite.xScale = obj.w/100;
+            body.render.sprite.yScale = obj.h/100;
+            body.customText = obj.text;
+            body.initialY = obj.y;
+            Matter.Composite.add(world, body);
+        });
+
+        Matter.Composite.add(world, [
+            Matter.Bodies.rectangle(window.innerWidth/2, -50, window.innerWidth, 100, {isStatic: true}),
+            Matter.Bodies.rectangle(window.innerWidth/2, window.innerHeight + 50, window.innerWidth, 100, {isStatic: true}),
+            Matter.Bodies.rectangle(-50, window.innerHeight/2, 100, window.innerHeight, {isStatic: true}),
+            Matter.Bodies.rectangle(window.innerWidth + 50, window.innerHeight/2, 100, window.innerHeight, {isStatic: true})
+        ]);
+
+        Matter.Composite.add(world, Matter.MouseConstraint.create(engine, { mouse: Matter.Mouse.create(render.canvas) }));
+
+        Matter.Events.on(render, 'afterRender', function() {
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'white'; ctx.font = 'bold 16px sans-serif'; ctx.textAlign = 'center';
+            world.bodies.forEach(b => {
+                if(b.isStatic) return;
+                if(world.gravity.y === 0) {
+                    const floatY = b.initialY + Math.sin(Date.now() / 600 + b.position.x) * 15;
+                    Matter.Body.setPosition(b, {x: b.position.x, y: floatY});
+                }
+                if(b.customText) ctx.fillText(b.customText, b.position.x, b.position.y + 75);
+            });
+        });
+
+        Matter.Runner.run(engine); Matter.Render.run(render);
+        window.addEventListener('mousedown', () => world.gravity.y = 1);
+        window.addEventListener('resize', () => location.reload());
+    </script>
 </body>
 </html>
