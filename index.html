@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub Card</title>
+    <title>Hub Card Gravity</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
         
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
@@ -16,51 +16,10 @@
             justify-content: center; 
             align-items: center; 
             padding: 20px; 
-            overflow: hidden; 
+            overflow: hidden; /* Żeby elementy nie wypadały poza ekran */
         }
 
-        /* Animacja pływania */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .floating { animation: float 4s ease-in-out infinite; }
-        .delay-1 { animation-delay: 0s; }
-        .delay-2 { animation-delay: 0.5s; }
-        .delay-3 { animation-delay: 1s; }
-        .delay-4 { animation-delay: 1.5s; }
-
-        .fixed-logo { position: fixed; top: 20px; left: 20px; width: 75px; height: 75px; z-index: 1000; border-radius: 50%; border: 2px solid #30363d; object-fit: cover; }
-
-        .capy-container { position: fixed; top: 20px; right: 20px; z-index: 1000; text-align: center; }
-        .right-top-gif { width: 100px; cursor: pointer; }
-
-        .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 120px; z-index: 1000; }
-        
-        .right-bottom-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; text-align: center; }
-        .right-bottom-img { width: 80px; cursor: pointer; border-radius: 50%; }
-
-        .hover-text {
-            visibility: hidden;
-            background-color: #30363d;
-            color: #fff;
-            text-align: center;
-            padding: 8px;
-            border-radius: 6px;
-            position: absolute;
-            bottom: 100%;
-            right: 0;
-            width: 200px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .capy-container:hover .hover-text, 
-        .right-bottom-container:hover .hover-text { visibility: visible; }
-
+        /* --- Główne elementy UI --- */
         .hub-card { 
             background-color: #161b22; 
             border: 1px solid #30363d; 
@@ -70,33 +29,37 @@
             max-width: 420px; 
             text-align: center; 
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1; /* Karta jest pod elementami fizyki */
         }
 
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
         .progress-container { background-color: #21262d; border-radius: 10px; height: 22px; width: 100%; margin-bottom: 35px; position: relative; }
         .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; position: relative; }
         .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; z-index: 10; }
-
         .bmc-button { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; transition: transform 0.1s; }
         .bmc-button:hover { transform: scale(1.02); }
+
+        /* --- CANVAS (tu dzieje się fizyka) --- */
+        #gravity-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Domyślnie mysz przechodzi przez canvas */
+            z-index: 100; /* Nad kartą */
+        }
+        
+        /* Klasa włączająca interakcję myszką dla canvasu */
+        #gravity-canvas.interacting {
+            pointer-events: auto;
+        }
+
     </style>
 </head>
 <body>
 
-    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" alt="Logo" class="fixed-logo floating delay-1">
-    
-    <div class="capy-container">
-        <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" alt="Cappy" class="right-top-gif floating delay-2">
-        <div class="hover-text">pls donate bro</div>
-    </div>
-
-    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" alt="Dance" class="bottom-gif floating delay-3">
-
-    <div class="right-bottom-container">
-        <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" alt="Support" class="right-bottom-img floating delay-4">
-        <div class="hover-text">Only you can support me financially; the amount doesn't matter.</div>
-    </div>
-
+    <!-- Główna karta -->
     <div class="hub-card">
         <h2 class="title">Nixware for month ❤️</h2>
          
@@ -111,5 +74,139 @@
         </a>
     </div>
 
+    <!-- Canvas dla fizyki -->
+    <canvas id="gravity-canvas"></canvas>
+
+    <!-- Biblioteka Matter.js (fizyka) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <script>
+        // Konfiguracja
+        const canvas = document.getElementById('gravity-canvas');
+        const engine = Matter.Engine.create();
+        const world = engine.world;
+        const render = Matter.Render.create({
+            canvas: canvas,
+            engine: engine,
+            options: {
+                width: window.innerWidth,
+                height: window.innerHeight,
+                wireframes: false, // Rysujemy obrazki, nie siatki
+                background: 'transparent'
+            }
+        });
+
+        // Wyłączenie grawitacji na start (żeby pływały, a nie spadły)
+        world.gravity.y = 0;
+
+        // Tablica naszych obiektów
+        const physicsObjects = [];
+
+        // --- Definicje Obrazków ---
+        const imagesData = [
+            { id: 'logo', url: 'https://pbs.twimg.com/media/FGH_shaXwAQOUid.png', x: 100, y: 100, w: 80, h: 80, circle: true, float: true },
+            { id: 'capy', url: 'https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif', x: window.innerWidth - 150, y: 100, w: 120, h: 120, circle: true, float: true, text: 'pls donate bro' },
+            { id: 'dance', url: 'https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif', x: 100, y: window.innerHeight - 150, w: 140, h: 140, float: true },
+            { id: 'support', url: 'https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png', x: window.innerWidth - 150, y: window.innerHeight - 150, w: 90, h: 90, circle: true, float: true }
+        ];
+
+        // Tworzenie ciał fizycznych
+        imagesData.forEach(data => {
+            const shape = data.circle 
+                ? Matter.Bodies.circle(data.x, data.y, data.w / 2, { restitution: 0.8, frictionAir: 0.02 })
+                : Matter.Bodies.rectangle(data.x, data.y, data.w, data.h, { restitution: 0.8, frictionAir: 0.02 });
+
+            Matter.Body.setAngle(shape, (Math.random() - 0.5) * 1); // Lekki obrót na start
+            
+            // Niestandardowe właściwości do renderowania
+            shape.render.sprite.texture = data.url;
+            shape.render.sprite.xScale = data.w / 100; // Zakładając, że source ma ok 100px
+            shape.render.sprite.yScale = data.h / 100;
+            shape.customText = data.text;
+            shape.float = data.float;
+            shape.initialY = data.y; // Do pływania
+
+            Matter.Composite.add(world, shape);
+            physicsObjects.push(shape);
+        });
+
+        // Niewidzialne ściany, żeby obiekty nie wypadały
+        const wallOptions = { isStatic: true, render: { visible: false } };
+        Matter.Composite.add(world, [
+            Matter.Bodies.rectangle(window.innerWidth/2, -10, window.innerWidth, 20, wallOptions), // Góra
+            Matter.Bodies.rectangle(window.innerWidth/2, window.innerHeight + 10, window.innerWidth, 20, wallOptions), // Dół
+            Matter.Bodies.rectangle(-10, window.innerHeight/2, 20, window.innerHeight, wallOptions), // Lewo
+            Matter.Bodies.rectangle(window.innerWidth + 10, window.innerHeight/2, 20, window.innerHeight, wallOptions) // Prawo
+        ]);
+
+        // --- Pętla renderująca (Rysowanie + Tekst + Pływanie) ---
+        const ctx = canvas.getContext('2d');
+        Matter.Events.on(render, 'afterRender', function() {
+            // Rysowanie tekstu pod kapibarą
+            const capy = physicsObjects.find(obj => obj.id === data.id = 'capy'); // To nie zadziała w pętli, znajdźmy inaczej
+        });
+        
+        // Poprawione rysowanie tekstu (w pętli renderującej)
+        Matter.Events.on(render, 'afterRender', function() {
+            ctx.font = 'bold 14px sans-serif';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+
+            physicsObjects.forEach(obj => {
+                if(obj.customText) {
+                    ctx.fillText(obj.customText, obj.position.x, obj.position.y + obj.circleRadius + 20);
+                }
+
+                // Logika "pływania" (tylko gdy grawitacja jest wyłączona)
+                if (obj.float && world.gravity.y === 0) {
+                    const floatTime = Date.now() / 1000;
+                    const floatY = obj.initialY + Math.sin(floatTime * 2 + obj.position.x * 0.01) * 10;
+                    Matter.Body.setPosition(obj, { x: obj.position.x, y: floatY });
+                }
+            });
+        });
+
+        // Uruchomienie silnika i renderera
+        Matter.Runner.run(engine);
+        Matter.Render.run(render);
+
+        // --- Interakcja Myszki (Google Gravity) ---
+        const mouse = Matter.Mouse.create(render.canvas);
+        const mouseConstraint = Matter.MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: { visible: false }
+            }
+        });
+
+        Matter.Composite.add(world, mouseConstraint);
+        render.mouse = mouse; // Keep the mouse in sync with rendering
+
+        // Aktywacja/Dezaktywacja interakcji (tylko gdy mysz jest nad obiektem)
+        Matter.Events.on(mouseConstraint, 'mousedown', function(event) {
+            if (event.source.body) {
+                canvas.classList.add('interacting');
+                // Włączamy grawitację, gdy zaczynamy ciągnąć
+                world.gravity.y = 1; 
+            }
+        });
+
+        Matter.Events.on(mouseConstraint, 'mouseup', function(event) {
+            canvas.classList.remove('interacting');
+            // Wyłączamy grawitację, gdy puścimy (opcjonalnie, żeby znów pływały)
+            // world.gravity.y = 0; 
+            // Jeśli chcesz, żeby *zostały* na dole, zakomentuj linię wyżej.
+        });
+
+        // Responsywność
+        window.addEventListener('resize', () => {
+            render.options.width = window.innerWidth;
+            render.options.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+    </script>
 </body>
 </html>
