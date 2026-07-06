@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub Card - Floating</title>
+    <title>Hub Card - Storm Mode</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -17,34 +17,29 @@
             align-items: center; 
             padding: 20px; 
             overflow: hidden;
+            animation: storm-shake 0.3s infinite;
         }
 
-        /* Efekt "pływania" (Floating) */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        @keyframes storm-shake {
+            0% { transform: translate(1px, 1px); }
+            25% { transform: translate(-1px, -2px); }
+            50% { transform: translate(-1px, 2px); }
+            75% { transform: translate(1px, -1px); }
+            100% { transform: translate(1px, 1px); }
         }
-        .floating { animation: float 4s ease-in-out infinite; }
-        
-        /* Opóźnienia dla lepszego efektu */
-        .delay-1 { animation-delay: 0s; }
-        .delay-2 { animation-delay: 1s; }
-        .delay-3 { animation-delay: 2s; }
-        .delay-4 { animation-delay: 3s; }
 
-        /* Klasyczne rozmiary ikon */
-        .fixed-logo { position: fixed; top: 20px; left: 20px; width: 75px; height: 75px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
+        /* Ikony - klikalne */
+        .clickable { cursor: pointer; transition: transform 0.2s; }
+        .clickable:hover { transform: scale(1.1); }
+
+        .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
         
         .capy-container { position: fixed; top: 20px; right: 20px; text-align: center; z-index: 10; }
-        .capy-img { width: 100px; }
-        .hover-text { font-weight: bold; color: #fff; margin-top: 5px; }
+        .capy-img { width: 80px; }
+        .capy-text { margin-top: 5px; font-weight: bold; color: #fff; font-size: 12px; }
 
-        .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 120px; z-index: 10; }
-        
-        .support-container { position: fixed; bottom: 20px; right: 20px; text-align: center; z-index: 10; }
-        .support-img { width: 80px; border-radius: 50%; }
-        .support-text { font-size: 10px; color: #8b949e; margin-top: 5px; }
+        .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 80px; z-index: 10; }
+        .support-img { position: fixed; bottom: 20px; right: 20px; width: 50px; z-index: 10; border-radius: 50%; }
 
         /* Karta główna */
         .hub-card { 
@@ -68,19 +63,15 @@
 </head>
 <body>
 
-    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo floating delay-1" alt="Logo">
+    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" alt="Logo" onclick="alert('To jest Twoje logo!')">
     
-    <div class="capy-container floating delay-2">
-        <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img" alt="Cappy">
-        <div class="hover-text">pls donate bro</div>
+    <div class="capy-container" onclick="alert('pls donate bro')">
+        <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img clickable" alt="Cappy">
+        <div class="capy-text">pls donate bro</div>
     </div>
 
-    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif floating delay-3" alt="Dance">
-    
-    <div class="support-container floating delay-4">
-        <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img" alt="Support">
-        <div class="support-text">Only you can support me financially</div>
-    </div>
+    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" alt="Dance" onclick="alert('Dzięki za kliknięcie!')">
+    <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img clickable" alt="Support" onclick="alert('Only you can support me!')">
 
     <div class="hub-card">
         <h2 class="title">Nixware for month ❤️</h2>
