@@ -1,84 +1,95 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub Card - Hearts</title>
+    <title>Hub Card - 3$=hvh god</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background-color: #0d1117; 
-            color: #c9d1d9; 
-            min-height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px; 
-            overflow: hidden;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: hidden; }
 
-        /* Efekt serduszek w tle */
-        .heart { position: absolute; bottom: -20px; color: #ff4d4d; font-size: 20px; animation: rise 6s infinite; opacity: 0.6; }
+        /* Serduszka w tle */
+        .heart { position: absolute; bottom: -20px; color: #ff4d4d; font-size: 20px; animation: rise 6s infinite; opacity: 0.6; z-index: 1; pointer-events: none; }
         @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-100vh); opacity: 0; } }
 
-        /* Ikony - klikalne */
+        /* Menu językowe */
+        .lang-menu { position: fixed; top: 20px; right: 20px; z-index: 20; background: #161b22; padding: 8px 12px; border-radius: 8px; border: 1px solid #30363d; }
+        .lang-menu span { margin: 0 5px; color: #8b949e; font-weight: bold; cursor: pointer; }
+        .lang-menu span:hover { color: #fff; }
+
+        /* Ikony */
         .clickable { cursor: pointer; transition: transform 0.2s; }
         .clickable:hover { transform: scale(1.1); }
-
         .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
-        
-        .capy-container { position: fixed; top: 20px; right: 20px; text-align: center; z-index: 10; }
+        .capy-container { position: fixed; top: 100px; right: 20px; text-align: center; z-index: 10; }
         .capy-img { width: 80px; }
         .capy-text { margin-top: 5px; font-weight: bold; color: #fff; font-size: 12px; }
-
         .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 80px; z-index: 10; }
         .support-img { position: fixed; bottom: 20px; right: 20px; width: 50px; z-index: 10; border-radius: 50%; }
 
-        /* Karta główna */
-        .hub-card { 
-            background-color: #161b22; 
-            border: 1px solid #30363d; 
-            border-radius: 16px; 
-            padding: 30px; 
-            width: 100%; 
-            max-width: 420px; 
-            text-align: center; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            z-index: 2;
-        }
-
+        /* Karta */
+        .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 5; }
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
+        
         .progress-container { background-color: #21262d; border-radius: 10px; height: 22px; width: 100%; margin-bottom: 35px; position: relative; }
-        .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; }
-        .bmc-button { display: inline-flex; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; transition: transform 0.1s; }
-        .bmc-button:hover { transform: scale(1.02); }
+        .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; position: relative; }
+        .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; }
+        
+        .bmc-button { display: inline-flex; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- Serduszka w tle -->
+    <div class="lang-menu">
+        <span onclick="setLang('PL')">PL</span>
+        <span onclick="setLang('RU')">RU</span>
+        <span onclick="setLang('EN')">EN</span>
+    </div>
+
+    <!-- Serduszka -->
     <div class="heart" style="left: 10%;">❤️</div>
     <div class="heart" style="left: 30%; animation-delay: 2s;">❤️</div>
     <div class="heart" style="left: 60%; animation-delay: 4s;">❤️</div>
     <div class="heart" style="left: 85%; animation-delay: 1s;">❤️</div>
 
-    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" alt="Logo" onclick="alert('Nixware user!')">
-    
-    <div class="capy-container" onclick="alert('pls donate bro')">
-        <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img clickable" alt="Cappy">
-        <div class="capy-text">pls donate bro</div>
+    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" onclick="alertText('logo')">
+    <div class="capy-container">
+        <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img clickable" onclick="alertText('capy')">
+        <div class="capy-text" id="capy-txt">pls donate bro</div>
     </div>
-
-    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" alt="Dance" onclick="alert('Stay positive!')">
-    <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img clickable" alt="Support" onclick="alert('Only you can support me!')">
+    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" onclick="alertText('dance')">
+    <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img clickable" onclick="alertText('support')">
 
     <div class="hub-card">
-        <h2 class="title">Nixware for month ❤️</h2>
-        <div class="progress-container"><div class="progress-bar"></div></div>
-        <a href="https://buymeacoffee.com/bilykovsasb" target="_blank" class="bmc-button">Buy me a coffee</a>
+        <h2 class="title" id="card-title">3$=hvh god ❤️</h2>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <img src="https://media.tenor.com/bw2H0PEvq7EAAAAi/chomik-chomikuj.gif" alt="Chomik" class="hamster-gif">
+            </div>
+        </div>
+        <a href="https://buymeacoffee.com/bilykovsasb" target="_blank" class="bmc-button" id="bmc-btn">Buy me a coffee</a>
     </div>
 
+    <script>
+        const translations = {
+            'EN': { title: '3$=hvh god ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', log: '3$=hvh god logo', dnc: 'Stay positive!', sup: 'Only you can support me!' },
+            'PL': { title: '3$=hvh god ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', log: 'Logo 3$=hvh god', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!' },
+            'RU': { title: '3$=hvh god ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', log: 'Логотип 3$=hvh god', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!' }
+        };
+
+        let currentLang = 'EN';
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('card-title').innerText = translations[lang].title;
+            document.getElementById('bmc-btn').innerText = translations[lang].btn;
+            document.getElementById('capy-txt').innerText = translations[lang].capy;
+        }
+
+        function alertText(type) {
+            const t = translations[currentLang];
+            const msgs = { 'logo': t.log, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup };
+            alert(msgs[type]);
+        }
+    </script>
 </body>
 </html>
