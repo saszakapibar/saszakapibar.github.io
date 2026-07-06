@@ -20,7 +20,10 @@
         /* Ikony */
         .clickable { cursor: pointer; transition: transform 0.2s; }
         .clickable:hover { transform: scale(1.1); }
+        
+        /* Obrazek w lewym górnym rogu */
         .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
+        
         .capy-container { position: fixed; top: 100px; right: 20px; text-align: center; z-index: 10; }
         .capy-img { width: 80px; }
         .capy-text { margin-top: 5px; font-weight: bold; color: #fff; font-size: 12px; }
@@ -31,9 +34,10 @@
         .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 5; }
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
         
+        /* Pasek z GIF-em chomika (tylko ozdoba) */
         .progress-container { background-color: #21262d; border-radius: 10px; height: 22px; width: 100%; margin-bottom: 35px; position: relative; }
         .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; position: relative; }
-        .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; cursor: pointer; }
+        .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; }
         
         .bmc-button { display: inline-flex; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; }
     </style>
@@ -46,14 +50,14 @@
         <span onclick="setLang('EN')">EN</span>
     </div>
 
-    <!-- Serduszka w tle -->
     <div class="heart" style="left: 10%;">❤️</div>
     <div class="heart" style="left: 30%; animation-delay: 2s;">❤️</div>
     <div class="heart" style="left: 60%; animation-delay: 4s;">❤️</div>
     <div class="heart" style="left: 85%; animation-delay: 1s;">❤️</div>
 
-    <!-- Ikony z unikalnymi wywołaniami -->
-    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" onclick="alertText('logo')">
+    <!-- Obrazek w lewym górnym rogu (kliknięcie = tekst) -->
+    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" onclick="alertText('hamster')">
+
     <div class="capy-container">
         <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img clickable" onclick="alertText('capy')">
         <div class="capy-text" id="capy-txt">pls donate bro</div>
@@ -61,12 +65,11 @@
     <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" onclick="alertText('dance')">
     <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img clickable" onclick="alertText('support')">
 
-    <!-- Karta główna -->
     <div class="hub-card">
         <h2 class="title" id="card-title">Nixware for month ❤️</h2>
         <div class="progress-container">
             <div class="progress-bar">
-                <img src="https://media.tenor.com/bw2H0PEvq7EAAAAi/chomik-chomikuj.gif" alt="Chomik" class="hamster-gif" onclick="alertText('hamster')">
+                <img src="https://media.tenor.com/bw2H0PEvq7EAAAAi/chomik-chomikuj.gif" alt="Chomik" class="hamster-gif">
             </div>
         </div>
         <a href="https://buymeacoffee.com/bilykovsasb" target="_blank" class="bmc-button" id="bmc-btn">Buy me a coffee</a>
@@ -74,18 +77,9 @@
 
     <script>
         const translations = {
-            'EN': { 
-                title: 'Nixware for month ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', 
-                logo: 'Nixware logo', dnc: 'Stay positive!', sup: 'Only you can support me!', hst: '3$=hvh god' 
-            },
-            'PL': { 
-                title: 'Nixware na miesiąc ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', 
-                logo: 'Logo Nixware', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!', hst: '3$=hvh god' 
-            },
-            'RU': { 
-                title: 'Nixware на месяц ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', 
-                logo: 'Логотип Nixware', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!', hst: '3$=hvh god' 
-            }
+            'EN': { title: 'Nixware for month ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', dnc: 'Stay positive!', sup: 'Only you can support me!', hst: '3$=hvh god' },
+            'PL': { title: 'Nixware na miesiąc ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!', hst: '3$=hvh god' },
+            'RU': { title: 'Nixware на месяц ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!', hst: '3$=hvh god' }
         };
 
         let currentLang = 'EN';
@@ -98,8 +92,8 @@
 
         function alertText(type) {
             const t = translations[currentLang];
-            const msgs = { 'logo': t.logo, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup, 'hamster': t.hst };
-            alert(msgs[type]);
+            const msgs = { 'hamster': t.hst, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup };
+            if(msgs[type]) alert(msgs[type]);
         }
     </script>
 </body>
