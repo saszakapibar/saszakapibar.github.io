@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub</title>
+    <style>
+        body {
+            background-color: #08080c;
+            color: #d1d1db;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        /* ХОМЯК В ЛЕВОМ ВЕРХНЕМ УГЛУ */
+        .chomik-left-corner {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 75px;
+            height: auto;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .chomik-left-corner:hover {
+            transform: scale(1.15);
+        }
+        /* Карточка цели */
+        .hub-card {
+            background: #111116;
+            border: 1px solid #1f1f2e;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 400px;
+            width: 85%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+        .goal-box {
+            background: #171722;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #00ffcc;
+        }
+        .goal-text { 
+            font-size: 17px; 
+            font-weight: bold; 
+            color: #ffffff; 
+            margin-bottom: 15px; 
+        }
+        /* Шкала прогресса Nixware */
+        .bar-background { 
+            background: #252535; 
+            border-radius: 12px; 
+            height: 14px; 
+            width: 100%; 
+            overflow: hidden; 
+            margin-bottom: 20px; 
+        }
+        .bar-fill { 
+            background: linear-gradient(90deg, #00ffcc, #0077ff); 
+            height: 100%; 
+            width: 15%; /* Твой прогресс сбора в % */
+            border-radius: 12px; 
+            box-shadow: 0 0 10px #00ffcc; 
+        }
+        /* Buy Me a Coffee */
+        .bmc-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffdd00;
+            color: #000000;
+            font-weight: bold;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+   
+    <img src="https://github.com" class="chomik-left-corner" alt="Chomikbox">
+
+    <div class="hub-card">
+        <div class="goal-box">
+            <div class="goal-text">Nixware (1 Month) 🎮🔥</div>
+            <div class="bar-background">
+                <div class="bar-fill"></div>
+            </div>
+            
+            <a href="https://buymeacoffee.com" target="_blank" class="bmc-button">
+                <span>Buy Me a Coffee</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
