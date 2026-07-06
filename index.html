@@ -28,11 +28,12 @@
             top: 20px;
             left: 20px;
             width: 75px;
-            height: auto;
+            height: 75px;
             z-index: 1000;
             transition: transform 0.3s ease;
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            object-fit: cover;
         }
 
         .fixed-logo:hover {
@@ -93,7 +94,7 @@
             z-index: 1;
         }
 
-        /* Tutaj wjechał Twój GIF z chomikiem */
+    
         .progress-bar::after {
             content: '';
             position: absolute;
@@ -102,7 +103,8 @@
             width: 32px;
             height: 32px;
             background-image: url('https://media.tenor.com/bw2H0PEvq7EAAAAi/chomik-chomikuj.gif'); 
-            background-size: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
             background-position: center;
             border-radius: 50%;
             border: 2px solid #00f2fe;
@@ -160,6 +162,7 @@
                 top: 15px;
                 left: 15px;
                 width: 60px;
+                height: 60px;
             }
             .hub-card {
                 padding: 24px 20px;
@@ -169,11 +172,10 @@
 </head>
 <body>
 
-    <!-- Link do tweeta wrzucony tutaj (pamiętaj o podmianie na bezpośredni link do fotki, jeśli nie będzie widać) -->
-    <img src="https://x.com/BoxChomik/status/1468736129616826370" alt="Hamster Logo" class="fixed-logo">
+    <img src="https://pbs.twimg.com/media/FGCvP6wXMAIbe7G?format=jpg&name=large" alt="Hamster Logo" class="fixed-logo">
 
     <div class="hub-card">
-        <h2 class="goal-title">Goal: Nixware for a month (CS2)</h2>
+        <h2 class="goal-title">Nixware for month ❤️</h2>
          
         <div class="progress-container">
             <div class="progress-bar">
