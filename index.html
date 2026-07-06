@@ -61,30 +61,49 @@
         .progress-container {
             background-color: #21262d;
             border-radius: 10px;
-            height: 16px;
+            height: 22px; /* Slightly taller to fit text inside comfortably */
             width: 100%;
             margin-bottom: 35px;
             position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .progress-bar {
             height: 100%;
-            width: 18%;
+            width: 45%; /* Adjusted for better spacing with the text */
             background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
             border-radius: 10px;
             box-shadow: 0 0 12px rgba(79, 172, 254, 0.7);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Mini hamster indicator on the progress bar using direct web URL */
+        
+        .progress-text {
+            position: absolute;
+            left: 15px;
+            white-space: nowrap;
+            font-size: 11px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+      
         .progress-bar::after {
             content: '';
             position: absolute;
             right: -15px;
-            top: -22px;
+            top: -18px;
             width: 32px;
             height: 32px;
-            background-image: url('https://i.ibb.co/3ykZpbyW/watermarked-img-5018001186902367712.png');
+            background-image: url('https://i.imgur.com/YgRdfTq.png');
             background-size: cover;
             background-position: center;
             border-radius: 50%;
@@ -93,12 +112,12 @@
             z-index: 2;
         }
 
-        /* "pls" label above the hamster */
+    
         .progress-bar::before {
             content: 'pls';
             position: absolute;
             right: -13px;
-            top: -42px;
+            top: -36px;
             font-size: 11px;
             font-weight: bold;
             color: #00f2fe;
@@ -153,14 +172,15 @@
 </head>
 <body>
 
-
-    <img src="https://i.ibb.co/3ykZpbyW/watermarked-img-5018001186902367712.png" alt="Hamster Logo" class="fixed-logo">
+    <img src="https://i.imgur.com/YgRdfTq.png" alt="Hamster Logo" class="fixed-logo">
 
     <div class="hub-card">
         <h2 class="goal-title">Goal: Nixware for a month (CS2)</h2>
         
         <div class="progress-container">
-            <div class="progress-bar"></div>
+            <div class="progress-bar">
+                <span class="progress-text">Nixware for month</span>
+            </div>
         </div>
 
         <a href="https://buymeacoffee.com/bilykovsasb" target="_blank" class="bmc-button">
