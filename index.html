@@ -18,7 +18,6 @@
             padding: 20px; 
         }
 
-        /* Logo w lewym górnym rogu */
         .fixed-logo { 
             position: fixed; 
             top: 20px; 
@@ -31,6 +30,36 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.5); 
             border: 2px solid #30363d; 
         }
+
+        /* Kontener na kapibarę z tekstem */
+        .capy-container { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            z-index: 1000; 
+            text-align: center;
+        }
+
+        .right-top-gif { width: 100px; cursor: pointer; }
+
+        .hover-text {
+            visibility: hidden;
+            background-color: #30363d;
+            color: #fff;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 6px;
+            position: absolute;
+            top: 110px;
+            right: 0;
+            width: 120px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .capy-container:hover .hover-text { visibility: visible; }
+
+        .bottom-gif { position: fixed; bottom: 20px; right: 20px; width: 120px; z-index: 1000; }
 
         .hub-card { 
             background-color: #161b22; 
@@ -67,7 +96,6 @@
             position: relative; 
         }
 
-        /* GIF chomika */
         .hamster-gif {
             position: absolute;
             right: -25px;
@@ -97,6 +125,14 @@
 <body>
 
     <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" alt="Logo" class="fixed-logo">
+    
+    <!-- Kapibara z hoverem -->
+    <div class="capy-container">
+        <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" alt="Cappy" class="right-top-gif">
+        <div class="hover-text">pls donate bro</div>
+    </div>
+
+    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" alt="Dance" class="bottom-gif">
 
     <div class="hub-card">
         <h2 class="title">Nixware for month ❤️</h2>
