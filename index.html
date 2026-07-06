@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub Card - Storm Mode</title>
+    <title>Hub Card - Hearts</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -17,16 +17,11 @@
             align-items: center; 
             padding: 20px; 
             overflow: hidden;
-            animation: storm-shake 0.3s infinite;
         }
 
-        @keyframes storm-shake {
-            0% { transform: translate(1px, 1px); }
-            25% { transform: translate(-1px, -2px); }
-            50% { transform: translate(-1px, 2px); }
-            75% { transform: translate(1px, -1px); }
-            100% { transform: translate(1px, 1px); }
-        }
+        /* Efekt serduszek w tle */
+        .heart { position: absolute; bottom: -20px; color: #ff4d4d; font-size: 20px; animation: rise 6s infinite; opacity: 0.6; }
+        @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-100vh); opacity: 0; } }
 
         /* Ikony - klikalne */
         .clickable { cursor: pointer; transition: transform 0.2s; }
@@ -63,14 +58,20 @@
 </head>
 <body>
 
-    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" alt="Logo" onclick="alert('To jest Twoje logo!')">
+    <!-- Serduszka w tle -->
+    <div class="heart" style="left: 10%;">❤️</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">❤️</div>
+    <div class="heart" style="left: 60%; animation-delay: 4s;">❤️</div>
+    <div class="heart" style="left: 85%; animation-delay: 1s;">❤️</div>
+
+    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" alt="Logo" onclick="alert('Nixware user!')">
     
     <div class="capy-container" onclick="alert('pls donate bro')">
         <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img clickable" alt="Cappy">
         <div class="capy-text">pls donate bro</div>
     </div>
 
-    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" alt="Dance" onclick="alert('Dzięki za kliknięcie!')">
+    <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" alt="Dance" onclick="alert('Stay positive!')">
     <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img clickable" alt="Support" onclick="alert('Only you can support me!')">
 
     <div class="hub-card">
