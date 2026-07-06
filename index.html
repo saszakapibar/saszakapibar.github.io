@@ -80,7 +80,6 @@
             align-items: center;
         }
 
-        /* Tekst wewnątrz paska (bez żadnych kwot i liczb) */
         .progress-text {
             position: absolute;
             left: 15px;
@@ -94,7 +93,7 @@
             z-index: 1;
         }
 
-        /* Ruchomy chomik z Tenora na końcu paska */
+        /* Nowy, bezpieczny link do animowanego chomika na pasku */
         .progress-bar::after {
             content: '';
             position: absolute;
@@ -102,7 +101,7 @@
             top: -18px;
             width: 32px;
             height: 32px;
-            background-image: url('https://media.tenor.com/E8S7YfR897AAAAAC/chomik-chomikuj.gif');
+            background-image: url('https://s12.gifyu.com/images/bEorY.gif');
             background-size: cover;
             background-position: center;
             border-radius: 50%;
@@ -111,7 +110,6 @@
             z-index: 2;
         }
 
-        /* Napis "pls" nad chomikiem */
         .progress-bar::before {
             content: 'pls';
             position: absolute;
@@ -171,8 +169,8 @@
 </head>
 <body>
 
-    <!-- Animowane logo chomika w lewym rogu ekranu -->
-    <img src="https://media.tenor.com/E8S7YfR897AAAAAC/chomik-chomikuj.gif" alt="Hamster Logo" class="fixed-logo">
+    <!-- Nowy, bezpieczny link do animowanego chomika w rogu ekranu -->
+    <img src="https://s12.gifyu.com/images/bEorY.gif" alt="Hamster Logo" class="fixed-logo">
 
     <div class="hub-card">
         <h2 class="goal-title">Goal: Nixware for a month (CS2)</h2>
