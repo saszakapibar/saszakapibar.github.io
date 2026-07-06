@@ -61,7 +61,7 @@
         .progress-container {
             background-color: #21262d;
             border-radius: 10px;
-            height: 22px; /* Slightly taller to fit text inside comfortably */
+            height: 22px;
             width: 100%;
             margin-bottom: 35px;
             position: relative;
@@ -71,17 +71,16 @@
 
         .progress-bar {
             height: 100%;
-            width: 45%; /* Adjusted for better spacing with the text */
+            width: 45%; 
             background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
             border-radius: 10px;
             box-shadow: 0 0 12px rgba(79, 172, 254, 0.7);
             position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
         }
 
-        
+        /* Tekst wewnątrz paska (bez żadnych kwot i liczb) */
         .progress-text {
             position: absolute;
             left: 15px;
@@ -95,7 +94,7 @@
             z-index: 1;
         }
 
-      
+        /* Ruchomy chomik z Tenora na końcu paska */
         .progress-bar::after {
             content: '';
             position: absolute;
@@ -103,7 +102,7 @@
             top: -18px;
             width: 32px;
             height: 32px;
-            background-image: url('https://i.imgur.com/YgRdfTq.png');
+            background-image: url('https://media.tenor.com/E8S7YfR897AAAAAC/chomik-chomikuj.gif');
             background-size: cover;
             background-position: center;
             border-radius: 50%;
@@ -112,7 +111,7 @@
             z-index: 2;
         }
 
-    
+        /* Napis "pls" nad chomikiem */
         .progress-bar::before {
             content: 'pls';
             position: absolute;
@@ -172,7 +171,8 @@
 </head>
 <body>
 
-    <img src="https://i.imgur.com/YgRdfTq.png" alt="Hamster Logo" class="fixed-logo">
+    <!-- Animowane logo chomika w lewym rogu ekranu -->
+    <img src="https://media.tenor.com/E8S7YfR897AAAAAC/chomik-chomikuj.gif" alt="Hamster Logo" class="fixed-logo">
 
     <div class="hub-card">
         <h2 class="goal-title">Goal: Nixware for a month (CS2)</h2>
