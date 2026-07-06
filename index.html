@@ -6,7 +6,7 @@
     <title>Hub Card Gravity</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
-        body { background-color: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        body { background-color: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 
         .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 1; }
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
@@ -39,14 +39,14 @@
             options: { width: window.innerWidth, height: window.innerHeight, wireframes: false, background: 'transparent' } 
         });
 
-        world.gravity.y = 0; // Początkowo brak grawitacji
+        world.gravity.y = 0;
 
-        // Definicja obiektów
+        // Obiekty pomniejszone 6-krotnie względem oryginału
         const objects = [
-            { url: 'https://pbs.twimg.com/media/FGH_shaXwAQOUid.png', x: 100, y: 100, w: 80, h: 80, text: '' },
-            { url: 'https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif', x: window.innerWidth/2, y: 250, w: 120, h: 120, text: 'pls donate bro' },
-            { url: 'https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif', x: 100, y: window.innerHeight - 150, w: 140, h: 140, text: '' },
-            { url: 'https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png', x: window.innerWidth - 150, y: window.innerHeight - 150, w: 90, h: 90, text: '' }
+            { url: 'https://pbs.twimg.com/media/FGH_shaXwAQOUid.png', x: 100, y: 100, w: 13, h: 13, text: '' },
+            { url: 'https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif', x: window.innerWidth/2, y: 250, w: 20, h: 20, text: 'pls donate bro' },
+            { url: 'https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif', x: 100, y: window.innerHeight - 150, w: 23, h: 23, text: '' },
+            { url: 'https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png', x: window.innerWidth - 150, y: window.innerHeight - 150, w: 15, h: 15, text: '' }
         ];
 
         objects.forEach(obj => {
@@ -59,7 +59,6 @@
             Matter.Composite.add(world, body);
         });
 
-        // Ściany niewidzialne
         Matter.Composite.add(world, [
             Matter.Bodies.rectangle(window.innerWidth/2, -50, window.innerWidth, 100, {isStatic: true}),
             Matter.Bodies.rectangle(window.innerWidth/2, window.innerHeight + 50, window.innerWidth, 100, {isStatic: true}),
@@ -67,26 +66,24 @@
             Matter.Bodies.rectangle(window.innerWidth + 50, window.innerHeight/2, 100, window.innerHeight, {isStatic: true})
         ]);
 
-        // Interakcja
         Matter.Composite.add(world, Matter.MouseConstraint.create(engine, { mouse: Matter.Mouse.create(render.canvas) }));
 
-        // Renderowanie z tekstem i pływaniem
         Matter.Events.on(render, 'afterRender', function() {
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'white'; ctx.font = 'bold 16px sans-serif'; ctx.textAlign = 'center';
+            ctx.fillStyle = 'white'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
             world.bodies.forEach(b => {
                 if(b.isStatic) return;
                 if(world.gravity.y === 0) {
-                    const floatY = b.initialY + Math.sin(Date.now() / 600 + b.position.x) * 15;
+                    const floatY = b.initialY + Math.sin(Date.now() / 600 + b.position.x) * 10;
                     Matter.Body.setPosition(b, {x: b.position.x, y: floatY});
                 }
-                if(b.customText) ctx.fillText(b.customText, b.position.x, b.position.y + 75);
+                if(b.customText) ctx.fillText(b.customText, b.position.x, b.position.y + 20);
             });
         });
 
         Matter.Runner.run(engine); Matter.Render.run(render);
         window.addEventListener('mousedown', () => world.gravity.y = 1);
-        window.addEventListener('resize', () => location.reload()); // Reset przy zmianie okna
+        window.addEventListener('resize', () => location.reload());
     </script>
 </body>
 </html>
