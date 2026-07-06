@@ -17,7 +17,7 @@
         .lang-menu span { margin: 0 5px; color: #8b949e; font-weight: bold; cursor: pointer; }
         .lang-menu span:hover { color: #fff; }
 
-        /* Ikony - klasyczny rozmiar */
+        /* Ikony */
         .clickable { cursor: pointer; transition: transform 0.2s; }
         .clickable:hover { transform: scale(1.1); }
         .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
@@ -27,7 +27,7 @@
         .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 80px; z-index: 10; }
         .support-img { position: fixed; bottom: 20px; right: 20px; width: 50px; z-index: 10; border-radius: 50%; }
 
-        /* Karta główna */
+        /* Karta */
         .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 5; }
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
         
@@ -52,7 +52,7 @@
     <div class="heart" style="left: 60%; animation-delay: 4s;">❤️</div>
     <div class="heart" style="left: 85%; animation-delay: 1s;">❤️</div>
 
-    <!-- Ikony -->
+    <!-- Ikony z unikalnymi wywołaniami -->
     <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" onclick="alertText('logo')">
     <div class="capy-container">
         <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img clickable" onclick="alertText('capy')">
@@ -61,7 +61,7 @@
     <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" onclick="alertText('dance')">
     <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img clickable" onclick="alertText('support')">
 
-    <!-- Karta -->
+    <!-- Karta główna -->
     <div class="hub-card">
         <h2 class="title" id="card-title">Nixware for month ❤️</h2>
         <div class="progress-container">
@@ -74,9 +74,18 @@
 
     <script>
         const translations = {
-            'EN': { title: 'Nixware for month ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', log: 'Nixware logo', dnc: 'Stay positive!', sup: 'Only you can support me!', hst: '3$=hvh god' },
-            'PL': { title: 'Nixware na miesiąc ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', log: 'Logo Nixware', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!', hst: '3$=hvh god' },
-            'RU': { title: 'Nixware на месяц ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', log: 'Логотип Nixware', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!', hst: '3$=hvh god' }
+            'EN': { 
+                title: 'Nixware for month ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', 
+                logo: 'Nixware logo', dnc: 'Stay positive!', sup: 'Only you can support me!', hst: '3$=hvh god' 
+            },
+            'PL': { 
+                title: 'Nixware na miesiąc ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', 
+                logo: 'Logo Nixware', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!', hst: '3$=hvh god' 
+            },
+            'RU': { 
+                title: 'Nixware на месяц ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', 
+                logo: 'Логотип Nixware', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!', hst: '3$=hvh god' 
+            }
         };
 
         let currentLang = 'EN';
@@ -89,7 +98,7 @@
 
         function alertText(type) {
             const t = translations[currentLang];
-            const msgs = { 'logo': t.log, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup, 'hamster': t.hst };
+            const msgs = { 'logo': t.logo, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup, 'hamster': t.hst };
             alert(msgs[type]);
         }
     </script>
