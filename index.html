@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub Card - 3$=hvh god</title>
+    <title>Hub Card - Nixware</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: hidden; }
@@ -17,7 +17,7 @@
         .lang-menu span { margin: 0 5px; color: #8b949e; font-weight: bold; cursor: pointer; }
         .lang-menu span:hover { color: #fff; }
 
-        /* Ikony */
+        /* Ikony - klasyczny rozmiar */
         .clickable { cursor: pointer; transition: transform 0.2s; }
         .clickable:hover { transform: scale(1.1); }
         .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
@@ -27,13 +27,13 @@
         .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 80px; z-index: 10; }
         .support-img { position: fixed; bottom: 20px; right: 20px; width: 50px; z-index: 10; border-radius: 50%; }
 
-        /* Karta */
+        /* Karta główna */
         .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 5; }
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
         
         .progress-container { background-color: #21262d; border-radius: 10px; height: 22px; width: 100%; margin-bottom: 35px; position: relative; }
         .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; position: relative; }
-        .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; }
+        .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; cursor: pointer; }
         
         .bmc-button { display: inline-flex; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; }
     </style>
@@ -46,12 +46,13 @@
         <span onclick="setLang('EN')">EN</span>
     </div>
 
-    <!-- Serduszka -->
+    <!-- Serduszka w tle -->
     <div class="heart" style="left: 10%;">❤️</div>
     <div class="heart" style="left: 30%; animation-delay: 2s;">❤️</div>
     <div class="heart" style="left: 60%; animation-delay: 4s;">❤️</div>
     <div class="heart" style="left: 85%; animation-delay: 1s;">❤️</div>
 
+    <!-- Ikony -->
     <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" onclick="alertText('logo')">
     <div class="capy-container">
         <img src="https://media1.tenor.com/m/JbTTyqYpHRMAAAAd/cappy-capybara.gif" class="capy-img clickable" onclick="alertText('capy')">
@@ -60,11 +61,12 @@
     <img src="https://i.pinimg.com/originals/b2/f7/01/b2f701c9e0a489e196e84a750553316f.gif" class="bottom-gif clickable" onclick="alertText('dance')">
     <img src="https://www.instalki.pl/wp-content/uploads/program/icons/eYgA2pao_400x400.png" class="support-img clickable" onclick="alertText('support')">
 
+    <!-- Karta -->
     <div class="hub-card">
-        <h2 class="title" id="card-title">3$=hvh god ❤️</h2>
+        <h2 class="title" id="card-title">Nixware for month ❤️</h2>
         <div class="progress-container">
             <div class="progress-bar">
-                <img src="https://media.tenor.com/bw2H0PEvq7EAAAAi/chomik-chomikuj.gif" alt="Chomik" class="hamster-gif">
+                <img src="https://media.tenor.com/bw2H0PEvq7EAAAAi/chomik-chomikuj.gif" alt="Chomik" class="hamster-gif" onclick="alertText('hamster')">
             </div>
         </div>
         <a href="https://buymeacoffee.com/bilykovsasb" target="_blank" class="bmc-button" id="bmc-btn">Buy me a coffee</a>
@@ -72,9 +74,9 @@
 
     <script>
         const translations = {
-            'EN': { title: '3$=hvh god ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', log: '3$=hvh god logo', dnc: 'Stay positive!', sup: 'Only you can support me!' },
-            'PL': { title: '3$=hvh god ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', log: 'Logo 3$=hvh god', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!' },
-            'RU': { title: '3$=hvh god ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', log: 'Логотип 3$=hvh god', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!' }
+            'EN': { title: 'Nixware for month ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', log: 'Nixware logo', dnc: 'Stay positive!', sup: 'Only you can support me!', hst: '3$=hvh god' },
+            'PL': { title: 'Nixware na miesiąc ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', log: 'Logo Nixware', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!', hst: '3$=hvh god' },
+            'RU': { title: 'Nixware на месяц ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', log: 'Логотип Nixware', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!', hst: '3$=hvh god' }
         };
 
         let currentLang = 'EN';
@@ -87,7 +89,7 @@
 
         function alertText(type) {
             const t = translations[currentLang];
-            const msgs = { 'logo': t.log, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup };
+            const msgs = { 'logo': t.log, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup, 'hamster': t.hst };
             alert(msgs[type]);
         }
     </script>
