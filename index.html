@@ -6,23 +6,37 @@
     <title>Hub Card - Nixware</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: hidden; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            
+            background-image: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIbhVTNKSMJ0ThTROd43aJQKzSdesDoCjQZc6cnMu3C9hFr4kzRqapKQTB&s=10');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #c9d1d9; 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+            overflow: hidden; 
+        }
 
-        /* Serduszka w tle */
+       
         .heart { position: absolute; bottom: -20px; color: #ff4d4d; font-size: 20px; animation: rise 6s infinite; opacity: 0.6; z-index: 1; pointer-events: none; }
         @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-100vh); opacity: 0; } }
 
-        /* Menu językowe */
+        
         .lang-menu { position: fixed; top: 20px; right: 20px; z-index: 20; background: #161b22; padding: 8px 12px; border-radius: 8px; border: 1px solid #30363d; }
         .lang-menu span { margin: 0 5px; color: #8b949e; font-weight: bold; cursor: pointer; }
         .lang-menu span:hover { color: #fff; }
 
-        /* Ikony */
+       
         .clickable { cursor: pointer; transition: transform 0.2s; }
         .clickable:hover { transform: scale(1.1); }
         
-        /* Obrazek w lewym górnym rogu */
-        .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; }
+        
+        .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; object-fit: cover; }
         
         .capy-container { position: fixed; top: 100px; right: 20px; text-align: center; z-index: 10; }
         .capy-img { width: 80px; }
@@ -30,11 +44,11 @@
         .bottom-gif { position: fixed; bottom: 20px; left: 20px; width: 80px; z-index: 10; }
         .support-img { position: fixed; bottom: 20px; right: 20px; width: 50px; z-index: 10; border-radius: 50%; }
 
-        /* Karta */
+        
         .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 5; }
         .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
         
-        /* Pasek z GIF-em chomika (tylko ozdoba) */
+        
         .progress-container { background-color: #21262d; border-radius: 10px; height: 22px; width: 100%; margin-bottom: 35px; position: relative; }
         .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; position: relative; }
         .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; }
@@ -55,7 +69,7 @@
     <div class="heart" style="left: 60%; animation-delay: 4s;">❤️</div>
     <div class="heart" style="left: 85%; animation-delay: 1s;">❤️</div>
 
-    <!-- Obrazek w lewym górnym rogu (kliknięcie = tekst) -->
+    <!-- Chomik w lewym górnym rogu -->
     <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" onclick="alertText('hamster')">
 
     <div class="capy-container">
