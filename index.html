@@ -93,7 +93,7 @@
             z-index: 1;
         }
 
-        /* Animowany chomik na pasku - teraz z działającym obrazkiem */
+        /* Chomik na pasku z użyciem proxy, które omija blokadę Imgura */
         .progress-bar::after {
             content: '';
             position: absolute;
@@ -101,7 +101,7 @@
             top: -18px;
             width: 32px;
             height: 32px;
-            background-image: url('https://i.imgur.com/RbksvZV.jpeg'); 
+            background-image: url('https://images.weserv.nl/?url=i.imgur.com/RbksvZV.jpeg'); 
             background-size: cover;
             background-position: center;
             border-radius: 50%;
@@ -169,8 +169,8 @@
 </head>
 <body>
 
-    <!-- Logo chomika w rogu ekranu -->
-    <img src="https://i.imgur.com/RbksvZV.jpeg" alt="Hamster Logo" class="fixed-logo">
+    <!-- Logo chomika w rogu ekranu (tutaj też profilaktycznie dałem proxy) -->
+    <img src="https://images.weserv.nl/?url=i.imgur.com/RbksvZV.jpeg" alt="Hamster Logo" class="fixed-logo">
 
     <div class="hub-card">
         <h2 class="goal-title">Goal: Nixware for a month (CS2)</h2>
