@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub Card - Nixware</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-image: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), url('background.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #c9d1d9; 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+            overflow: hidden; 
+        }
+        
+        .cassette-container { 
+            position: fixed; 
+            top: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            text-align: center; 
+            z-index: 100; 
+        }
+        .cassette-img { 
+            width: 140px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            filter: brightness(100%) grayscale(0%); 
+        }
+        .cassette-img.frozen { 
+            filter: brightness(50%) grayscale(100%); 
+            transform: scale(0.95);
+        }
+
+        .heart { position: absolute; bottom: -20px; color: #ff4d4d; font-size: 20px; animation: rise 6s infinite; opacity: 0.6; z-index: 1; pointer-events: none; }
+        @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-100vh); opacity: 0; } }
+
+        .lang-menu { position: fixed; top: 20px; right: 20px; z-index: 20; background: #161b22; padding: 8px 12px; border-radius: 8px; border: 1px solid #30363d; }
+        .lang-menu span { margin: 0 5px; color: #8b949e; font-weight: bold; cursor: pointer; }
+        .lang-menu span:hover { color: #fff; }
+
+        .clickable { cursor: pointer; transition: transform 0.2s; }
+        .clickable:hover { transform: scale(1.1); }
+        
+        .fixed-logo { position: fixed; top: 20px; left: 20px; width: 60px; height: 60px; z-index: 10; border-radius: 50%; border: 2px solid #30363d; object-fit: cover; }
+        
+        .capy-container { position: fixed; top: 100px; right: 20px; text-align: center; z-index: 10; }
+        .capy-img { width: 80px; }
+        .capy-text { margin-top: 5px; font-weight: bold; color: #fff; font-size: 12px; }
+        
+        .support-img { position: fixed; bottom: 20px; right: 20px; width: 50px; z-index: 10; border-radius: 50%; }
+
+        .side-links-container { position: fixed; bottom: 20px; left: 20px; display: flex; align-items: center; gap: 15px; z-index: 100; }
+        .links-col { display: flex; flex-direction: column; gap: 10px; }
+        .widget-link { background-color: #30363d; color: #c9d1d9; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-size: 12px; font-weight: bold; border: 1px solid #444; }
+        .widget-link:hover { background-color: #444; color: #fff; }
+        .side-hamster { width: 80px; }
+
+        .hub-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); z-index: 5; }
+        .title { font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; color: #f0f6fc; }
+        
+        .progress-container { background-color: #21262d; border-radius: 10px; height: 22px; width: 100%; margin-bottom: 35px; position: relative; }
+        .progress-bar { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); border-radius: 10px; position: relative; }
+        .hamster-gif { position: absolute; right: -25px; top: -30px; width: 50px; height: 50px; }
+        
+        .bmc-button { display: inline-flex; justify-content: center; width: 100%; padding: 14px; background-color: #FFDD00; color: #000; text-decoration: none; font-weight: 700; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="cassette-container">
+        <img src="cassette.webp" id="cassette" class="cassette-img" onclick="toggleMusic()" alt="Cassette">
+        <audio id="bg-music" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="lang-menu">
+        <span onclick="setLang('PL')">PL</span>
+        <span onclick="setLang('RU')">RU</span>
+        <span onclick="setLang('EN')">EN</span>
+    </div>
+
+    <div class="side-links-container">
+        <img src="ezgif-5e35ff0250a6bc70.webp" class="side-hamster clickable" onclick="alertText('dance')">
+        <div class="links-col">
+            <a href="https://github.com/saszakapibar" target="_blank" class="widget-link">GitHub</a>
+            <a href="https://steamcommunity.com/tradeoffer/new/?partner=762651875&token=-jjNSIvm" target="_blank" class="widget-link">Donate skins</a>
+        </div>
+    </div>
+
+    <div class="heart" style="left: 10%;">❤️</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">❤️</div>
+    <div class="heart" style="left: 60%; animation-delay: 4s;">❤️</div>
+    <div class="heart" style="left: 85%; animation-delay: 1s;">❤️</div>
+
+    <img src="https://pbs.twimg.com/media/FGH_shaXwAQOUid.png" class="fixed-logo clickable" onclick="alertText('hamster')">
+
+    <div class="capy-container">
+        <img src="ezgif-5e1d0f8bb6eb6549.webp" class="capy-img clickable" onclick="alertText('capy')">
+        <div class="capy-text" id="capy-txt">pls donate bro</div>
+    </div>
+    
+    <img src="ezgif-545b6793c83d7395.webp" class="support-img clickable" onclick="alertText('support')">
+
+    <div class="hub-card">
+        <h2 class="title" id="card-title">Nixware for month ❤️</h2>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <img src="https://media.tenor.com/bw2H0PEvq7EAAAAi/chomik-chomikuj.gif" alt="Chomik" class="hamster-gif">
+            </div>
+        </div>
+        <a href="https://buymeacoffee.com/bilykovsasb" target="_blank" class="bmc-button" id="bmc-btn">Buy me a coffee</a>
+    </div>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const cassette = document.getElementById('cassette');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                cassette.classList.remove('frozen');
+            } else {
+                music.pause();
+                cassette.classList.add('frozen');
+            }
+        }
+
+        const translations = {
+            'EN': { title: 'Nixware for month ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', dnc: 'Stay positive!', sup: 'Only you can support me!', hst: '3$=hvh god' },
+            'PL': { title: 'Nixware na miesiąc ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!', hst: '3$=hvh god' },
+            'RU': { title: 'Nixware на месяц ❤️', btn: 'Купить мне кофе', capy: 'поддержи меня бро', dnc: 'Будь на позитиве!', sup: 'Только ты можешь поддержать!', hst: '3$=hvh god' }
+        };
+
+        let currentLang = 'EN';
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('card-title').innerText = translations[lang].title;
+            document.getElementById('bmc-btn').innerText = translations[lang].btn;
+            document.getElementById('capy-txt').innerText = translations[lang].capy;
+        }
+
+        function alertText(type) {
+            const t = translations[currentLang];
+            const msgs = { 'hamster': t.hst, 'capy': t.capy, 'dance': t.dnc, 'support': t.sup };
+            if(msgs[type]) alert(msgs[type]);
+        }
+    </script>
+</body>
+</html>
