@@ -19,6 +19,23 @@
             align-items: center; 
             padding: 20px; 
             overflow: hidden; 
+        }                                                                                       
+        .cassette-container { 
+            position: fixed; 
+            top: 40%; 
+            right: 15%; 
+            text-align: center; 
+            z-index: 100; 
+        }
+        .cassette-img { 
+            width: 140px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            filter: brightness(100%) grayscale(0%); 
+        }
+        .cassette-img.frozen { 
+            filter: brightness(50%) grayscale(100%); 
+            transform: scale(0.95);
         }
 
         .heart { position: absolute; bottom: -20px; color: #ff4d4d; font-size: 20px; animation: rise 6s infinite; opacity: 0.6; z-index: 1; pointer-events: none; }
@@ -56,6 +73,13 @@
     </style>
 </head>
 <body>
+
+    <div class="cassette-container">
+        <img src="cassette.webp" id="cassette" class="cassette-img" onclick="toggleMusic()" alt="Cassette">
+        <audio id="bg-music" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <div class="lang-menu">
         <span onclick="setLang('PL')">PL</span>
@@ -96,6 +120,19 @@
     </div>
 
     <script>
+        const music = document.getElementById('bg-music');
+        const cassette = document.getElementById('cassette');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                cassette.classList.remove('frozen');
+            } else {
+                music.pause();
+                cassette.classList.add('frozen');
+            }
+        }
+
         const translations = {
             'EN': { title: 'Nixware for month ❤️', btn: 'Buy me a coffee', capy: 'pls donate bro', dnc: 'Stay positive!', sup: 'Only you can support me!', hst: '3$=hvh god' },
             'PL': { title: 'Nixware na miesiąc ❤️', btn: 'Postaw mi kawę', capy: 'wesprzyj mnie bro', dnc: 'Bądź pozytywny!', sup: 'Tylko Ty możesz mnie wesprzeć!', hst: '3$=hvh god' },
